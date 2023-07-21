@@ -4,10 +4,21 @@ def filtra_valor (dado):
     return dado_valor
 
 url = "https://bytebank.com/cambio?moedaOritem=real&moedaDestino=dolar"
+url = ""
+
+#Sanitização da URL
+url = url.strip()
+
+#validação da URL
+if url == "":
+    raise ValueError("A URL ESTÁ VAZIA")
+
+#Separa a base dos parametros
 dados = url.split("?")
 url_base = dados[0]
 url_parametros = dados[1]
 
+#Filtra os valores dos parametros 
 parametros = url_parametros.split("&")
 primeiro_parametro = parametros[0]
 primeiro_parametro_valor = filtra_valor(primeiro_parametro)
