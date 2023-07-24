@@ -1,14 +1,31 @@
+import re
+
 class EXTRATOR_URL:
     def __init__(self, url):
         self.url = self.sanitiza_url(url)
         self.valida_url()
+    
+    def __len__(self):
+        return len(self.url)
+    
+    def __str__(self):
+        return self.url
 
     def sanitiza_url(self, url):
-        return url.strip()
+        if type(url) == str:
+            return url.strip()
+        else:
+            return ""
     
     def valida_url(self):
-        if self.url == "":
+        if not self.url:
             raise ValueError("A URL ESTÁ VAZIA")
+        
+        padrao_url = re.compile('(http(s)?://)?(www.)?bytebank.com(.br)?/cambio')
+        match = padrao_url.match(self.url)
+        if not match:
+            raise ValueError("A URL é invalida!")
+        
         
     def get_url_base(self):
         dados = self.split("?")
@@ -33,6 +50,6 @@ class EXTRATOR_URL:
 
 
 
-extrator_url = EXTRATOR_URL( "https://bytebank.com/cambio?moedaOritem=real&moedaDestino=dolar")
+extrator_url = EXTRATOR_URL( "https://bytebank.com/cambio?moedaOritem=real&moedaDestino=dolar&quantidade=100")
 parametros = extrator_url.get_valor_parametro()
 print(parametros)
