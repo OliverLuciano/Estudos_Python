@@ -13,6 +13,11 @@ class Funcionario:
     @property
     def salario(self):
         return self._salario
+    
+    def sobrenome(self):
+        nome_completo = self.nome.strip()
+        nome_quebrado = nome_completo.split(" ")
+        return nome_quebrado[-1]
 
     def idade(self):
         data_nasciemnto_quebrada = self._data_nascimento.split('/')
